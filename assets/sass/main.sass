@@ -1,0 +1,111 @@
+*
+    box-sizing: border-box
+
+.player-container
+    position: fixed
+    right: 50px
+    z-index: 100
+    display: flex
+    justify-content: flex-end
+
+.player
+    position: relative
+    width: 350px
+    height: 350px
+    padding-top: 30px
+    z-index: 1
+    background-image: url(../img/bg-player.png)
+    background-repeat: 
+    background-size: contain
+    &__element-vinyl
+        transition: 1s
+        padding: 40px
+        height: auto
+        display: inline-block
+        transform: rotateX(65deg)
+        position: absolute
+        top: 105px
+        left: -16px
+    &__element-tonearm
+        width: 110px
+        height: 100px
+        position: absolute
+        right: 70px
+        bottom: 48px
+        background-image: url(../img/start.png)
+        background-repeat: no-repeat
+        background-size: contain
+    &__element-bars
+        position: absolute
+        top: 190px
+        right: 52px
+        z-index: 115
+        transform: rotateX(65deg) skewX(11deg)
+    &__element-controls
+        display: flex
+        align-items: center
+        justify-content: center
+        width: 350px
+        height: 32px
+        position: absolute
+        bottom: -40px
+        transition: 1s
+    &__element-info
+        width: 348px
+        height: 25px
+        line-height: 27px
+        padding: 0 33px
+        transform: rotateX(-40deg)
+        position: absolute
+        bottom: 17px
+        text-align: center
+        border-radius: 8px
+        letter-spacing: 2px
+        color: #c6e2ff
+        transition: 1s
+    &__element-scrubber
+        width: 300px
+        position: absolute
+        bottom: 0px
+        left: 21px
+
+.element-vinyl
+    &__shadow
+        transition: 1s
+        position: absolute
+        top: 40px
+        left: 40px
+        width: 190px
+        height: 190px
+        overflow: hidden
+        border-radius: 50%
+    &__disk
+        position: relative
+        width: 190px
+        height: 190px
+        overflow: hidden
+        border-radius: 50%
+        background-image: url(../img/plastinka.png)
+        background-size: cover
+        background-repeat: no-repeat
+
+.element-tonearm
+    &__img
+        transform-origin: 60px 25px 0px;
+        max-width: 100%
+
+.element-controls
+    display: inline-block
+    padding-right: 10px
+    background-color: transparent
+    &:hover
+        outline: none
+        cursor: pointer
+
+.svg
+    max-height: 25px
+    width: 25px
+
+.svg path 
+    fill: rgba(30, 132, 242, 0.92)
+    transition: .35s

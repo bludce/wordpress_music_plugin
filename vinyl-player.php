@@ -9,7 +9,7 @@ Plugin URI: https://github.com/bludce/wordpress_music_plugin
 */
 
 define('VINYL_PLAYER_DIR', plugin_dir_path(__FILE__));
-define('VINYL_PLAYER_URL', plugin_dir_url(__FILE__));
+define('VINYL_PLAYER_URL', plugin_dir_path(__FILE__));
 
 register_activation_hook(__FILE__, 'vinyl_activation');
 register_deactivation_hook(__FILE__, 'vinyl_deactivation');
@@ -21,7 +21,7 @@ function vinyl_load(){
     if(is_admin()) // подключаем файлы администратора, только если он авторизован
         require_once(VINYL_PLAYER_DIR.'includes/admin.php');
         
-    //require_once(VINYL_PLAYER_URL.'includes/core.php');
+    require_once(VINYL_PLAYER_URL.'includes/core.php');
 }
 vinyl_load();
 

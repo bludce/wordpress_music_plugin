@@ -1,9 +1,12 @@
+@import "fonts.sass"
+    
 *
     box-sizing: border-box
 
 .player-container
     position: fixed
-    right: 50px
+    top: 120px
+    right: 250px
     z-index: 100
     display: flex
     justify-content: flex-end
@@ -17,6 +20,7 @@
     background-image: url(../img/bg-player.png)
     background-repeat: 
     background-size: contain
+    -webkit-user-select: none
     &__element-vinyl
         transition: 1s
         padding: 40px
@@ -25,16 +29,13 @@
         transform: rotateX(65deg)
         position: absolute
         top: 105px
-        left: -16px
+        left: -13px
     &__element-tonearm
         width: 110px
-        height: 100px
+        height: 95px
         position: absolute
-        right: 70px
-        bottom: 48px
-        background-image: url(../img/start.png)
-        background-repeat: no-repeat
-        background-size: contain
+        right: 68px
+        bottom: 53px
     &__element-bars
         position: absolute
         top: 190px
@@ -62,12 +63,20 @@
         border-radius: 8px
         letter-spacing: 2px
         color: #c6e2ff
+        animation: neon .08s ease-in-out infinite alternate
         transition: 1s
     &__element-scrubber
         width: 300px
+        height: 5px
         position: absolute
-        bottom: 0px
+        bottom: 6px
         left: 21px
+    &__element-volume
+        position: absolute
+        transform: rotateX(70deg)
+        z-index: 5
+        bottom: 64px
+        right: 26px
 
 .element-vinyl
     &__shadow
@@ -79,6 +88,8 @@
         height: 190px
         overflow: hidden
         border-radius: 50%
+        opacity: 0
+        animation: boxNeon .08s ease-in-out infinite alternate
     &__disk
         position: relative
         width: 190px
@@ -91,8 +102,9 @@
 
 .element-tonearm
     &__img
-        transform-origin: 60px 25px 0px;
+        transform-origin: 60px 25px 0px
         max-width: 100%
+        height: 95px
 
 .element-controls
     display: inline-block
@@ -101,11 +113,153 @@
     &:hover
         outline: none
         cursor: pointer
+    &__pause
+        display: none
 
-.svg
+.element-volume
+    &__container
+        position: relative
+        width: 40px
+        height: 40px
+        z-index: 5
+    &__indicator
+        position: absolute
+        width: 6px
+        height: 6px
+        border-radius: 50%
+        background-color: red
+        box-shadow: 0 0 1px #222
+
+.element-scrubber
+    cursor: pointer
+    background-color: #222
+    &__progress
+        cursor: pointer
+        height: 100%
+        width: 0%
+        background-color: #fff
+
+
+
+.mysvg
     max-height: 25px
     width: 25px
 
-.svg path 
+.mysvg path 
     fill: rgba(30, 132, 242, 0.92)
     transition: .35s
+
+.cover
+    position: absolute
+    z-index: 1
+    top: 50%
+    left: 50%
+    width: 84px
+    height: 84px
+    overflow: hidden
+    transform-origin: 0 0
+    transform: rotate(0) translate(-50%,-50%)
+    border-radius: 50%
+    animation: spin 4s linear infinite paused
+    &:before
+        content: ''
+        position: absolute
+        z-index: 10
+        top: 50%
+        left: 50%
+        width: 100%
+        height: 100%
+        transform-origin: 0 0
+        transform: rotate(0) translate(-50%,-50%)
+        border-radius: 50%
+        box-shadow: inset 0 0.0625em rgba(255,255,255,0.3)
+        animation: spin 4s linear infinite reverse paused
+    &:after
+        content: ''
+        position: absolute
+        z-index: 10
+        top: 50%
+        left: 50%
+        transform-origin: 0 0
+        transform: rotate(0) translate(-50%,-50%)
+        border-radius: 50%
+        animation: spin 4s linear infinite reverse paused
+        width: 0.25em
+        height: 0.3125em
+        margin-top: -0.0625em
+        background-color: #eee
+        border-radius: 0.125em
+        box-shadow: inset 0 -0.0625em 0.0625em rgba(0,0,0,0.5), inset 0.0625em -0.0625em 0.125em rgba(255,255,255,0.15), inset -0.0625em -0.0625em 0.125em rgba(255,255,255,0.15), inset 0 -0.125em 0.125em rgba(0,0,0,0.8), 0 0.0625em 0.0625em rgba(0,0,0,0.5), 0 0.0625em 0.25em 0.0625em rgba(0,0,0,0.15), 0 0 0.25em 0.125em rgba(0,0,0,0.15)
+
+.gradient
+    background-color: #0383a3
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zd…AiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjdnNnZykiIC8+PC9zdmc+)
+    background-image: -webkit-gradient(linear, 0% 0%, 100% 100%,color-stop(0, rgb(0, 83, 103)),color-stop(1, rgb(6, 178, 222)))
+    background-image: -webkit-repeating-linear-gradient(top left,rgb(0, 83, 103) 0%,rgb(6, 178, 222) 100%);
+    background-image: -o-repeating-linear-gradient(top left,rgb(0, 83, 103) 0%,rgb(6, 178, 222) 100%)
+    background-image: repeating-linear-gradient(to bottom right,rgb(0, 83, 103) 0%,rgb(6, 178, 222) 100%)
+    background-image: -ms-repeating-linear-gradient(top left,rgb(0, 83, 103) 0%,rgb(6, 178, 222) 100%)
+
+
+
+.player-playlist
+    list-style: none
+    transition: 1s
+    position: absolute
+    top: 100px
+    right: 100px
+
+.song
+    position: relative
+    width: 150px
+    height: 150px
+    border-radius: 50%
+    overflow: hidden
+    background-image: url(../img/plastinka.png)
+    background-repeat: no-repeat
+    background-size: contain
+    &:not(:first-child)
+        transition: 1s
+        margin-top: -80px
+    &:hover
+        z-index: 1
+    &__cover
+        position: absolute
+        top: 50%
+        left: 50%
+        width: 85px
+        height: 85px
+        border-radius: 50%
+        overflow: hidden
+        transform-origin: 0 0
+        transform: translate(-50%, -50%)
+        animation: spin 4s linear infinite paused
+
+
+.text-circle
+    position: relative
+    z-index: 0
+    top: 18px
+    right: -6px
+
+.song-text
+    font-size: 18px
+
+.paused 
+    display: inline-block
+
+.none 
+    display: none
+
+.colorBar
+    width: 20px
+    height: 7px
+    transition: 0.3s
+    opacity: 0
+
+.active
+    opacity: 1
+
+
+
+@import "animation.sass"

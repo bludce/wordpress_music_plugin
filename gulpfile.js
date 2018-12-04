@@ -5,12 +5,7 @@ var gulp       = require('gulp'), // Подключаем Gulp
     uglify       = require('gulp-uglify'), // Подключаем gulp-uglifyjs (для сжатия JS)
     cssnano      = require('gulp-cssnano'), // Подключаем пакет для минификации CSS
     rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
-    del          = require('del'), // Подключаем библиотеку для удаления файлов и папок
-    imagemin     = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
-    pngquant     = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
-    cache        = require('gulp-cache'), // Подключаем библиотеку кеширования
     autoprefixer = require('gulp-autoprefixer');// Подключаем библиотеку для автоматического добавления префиксов
-    spritesmith = require('gulp.spritesmith');//Подключаем библиотеку для объединения иконок в спрайты
 
 
 /*Конвертируем sass в css*/
@@ -22,15 +17,6 @@ gulp.task('sass', function(){
         .pipe(browserSync.reload({stream: true})) 
 });
 
-/*Переносим библиотеки из bower в app*/
-gulp.task('scripts', function() {
-    return gulp.src([ 
-        'bower_components/jquery/dist/jquery.min.js', 
-        'bower_components/owl.carousel/dist/owl.carousel.min.js', 
-        ])
-        .pipe(gulp.dest('app/js')); 
-});
-
 /*Создаем сервер с livereload*/
 gulp.task('browser-sync', function() { 
     browserSync.init({
@@ -39,8 +25,8 @@ gulp.task('browser-sync', function() {
 });
 
 /*Смотрим изменение файлов php,sass,js*/
-gulp.task('watch', ['browser-sync' , 'scripts'], function() {
+gulp.task('watch', ['browser-sync'], function() {
     gulp.watch('assets/sass/**/*.sass', ['sass']); 
-    gulp.watch('app/js/**/*.js', browserSync.reload);   
+    gulp.watch('assets/js/**/*.js').on('change', browserSync.reload);
     gulp.watch('./**/*.php').on('change', browserSync.reload);
 });

@@ -18,7 +18,7 @@ function my_custom_menu_page(){?>
             global $wpdb;
             $table_name = $wpdb->prefix . "vinyl";
             $music = $wpdb->get_results("
-            SELECT ID, src, song, artist 
+            SELECT * 
             FROM $table_name
             WHERE ID IS NOT NULL 
             ");
@@ -35,13 +35,13 @@ function my_custom_menu_page(){?>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($music as $row) {?>
+                        <?php $id=1; foreach ($music as $row) {?>
                         <tr>
-                            <td><?php echo $row->ID?></td>
+                            <td><?php echo $id?></td>
                                 <td><?php echo $row->song?></td>
                                 <td><?php echo $row->artist?></td>
                             </tr>
-                        <?php } ?>
+                        <?php $id++; } ?>
                     </tbody>
                 </table>
             </div>
@@ -68,8 +68,7 @@ function my_custom_menu_page(){?>
         
             if ( $movefile && empty($movefile['error']) ) {
                 echo "Файл был успешно загружен.\n";
-                //print_r( $movefile );
-                $wpdb->insert($table_name, array('src'=>$movefile["file"], 'song'=>$_POST["song"],'artist'=>$_POST["artist"]));
+                $wpdb->insert($table_name, array('src'=>$movefile["url"], 'song'=>$_POST["song"],'artist'=>$_POST["artist"]));
             } else {
                 echo "Возможны атаки при загрузке файла!\n";
             }

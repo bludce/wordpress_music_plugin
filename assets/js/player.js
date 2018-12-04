@@ -387,7 +387,7 @@ jQuery(document).ready(function() {
         } 
     });
 
-    //display current audio play time
+    //Заполнение прогресс бара
 	jQuery('.audio').on('timeupdate', function() {
 		var currentPos = audio.currentTime;
 		var maxduration = audio.duration;
@@ -399,9 +399,9 @@ jQuery(document).ready(function() {
 		jQuery('.element-scrubber__progress').css('width',perc+'%');
 	});
 
-    //audio PROGRESS BAR
-	//when audio timebar clicked
-	var timeDrag = false;	/* check for drag event */
+    
+	//Делаю кликабельным и drag прогресс бар
+	var timeDrag = false;	
 	jQuery('.player__element-scrubber').on('mousedown', function(e) {
 		timeDrag = true;
 		updatebar(e.pageX);
@@ -419,9 +419,6 @@ jQuery(document).ready(function() {
 	});
 	var updatebar = function(x) {
         var progress = jQuery('.player__element-scrubber');
-		//calculate drag position
-		//and update audio currenttime
-		//as well as progress bar
         var maxduration = audio.duration;
 		var position = x - progress.offset().left;
 		var percentage = 100 * position / progress.width();
@@ -432,7 +429,6 @@ jQuery(document).ready(function() {
 			percentage = 0;
 		}
 		jQuery('.element-scrubber__progress').css('width',percentage+'%');
-		//$('.my-audio-volume-button').css('margin-left',percentage-2+'%');
 		audio.currentTime = maxduration * percentage / 100;
 	};
 
